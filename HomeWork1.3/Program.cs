@@ -8,9 +8,10 @@ namespace HomeWork1._3
 {
 	class Program
 	{
+		//Программа вычисления растояния между точками.
 		static void Main(string[] args)
 		{
-			//Программа вычисления растояния между точками.
+			
 			ConWrite("Enter point x1:");
 			int x1 = ConRead();
 

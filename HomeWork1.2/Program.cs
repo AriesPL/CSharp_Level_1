@@ -8,9 +8,10 @@ namespace HomeWork1._2
 {
 	class Program
 	{
+		//Расчитать массу человека по веденым росту и весу.
 		static void Main(string[] args)
 		{
-			//Расчитать массу человека по веденым росту и весу.
+			
 
 			Console.WriteLine("Enter height:");
 			float height = Convert.ToInt32(Console.ReadLine());

@@ -8,9 +8,10 @@ namespace HomeWork1._1
 {
 	class Program
 	{
+		//Написать программу анкета.
 		static void Main(string[] args)
 		{
-			//Написать программу анкета.
+			
 
 			Console.WriteLine("Enter you name:");
 			string name = Convert.ToString(Console.ReadLine());
