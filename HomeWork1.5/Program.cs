@@ -9,11 +9,12 @@ namespace HomeWork1._5
 {
 	class Program
 	{
+		//Вывод Имя,Фамилию и город. Организовать вывод в центре консоли.
 		static void Main(string[] args)
 		{
-			//Вывод Имя,Фамилию и город. Организовать вывод в центре консоли.
-			Print print = new Print();// Создать свой класс Print
-			Pause pause = new Pause();// Сщздать свой класс Pause
+			
+			
+			
 			
 			int top, left;
 			string info = "Sergeev Alexey. Tomsk city";
@@ -22,9 +23,9 @@ namespace HomeWork1._5
 			top = Console.WindowHeight / 2;
 			
 			Console.SetCursorPosition(left - info.Length/2, top);
-			print.Write(info);
+			Print.Write(info); // Создать свой класс Print
 
-			pause.Stop();
+			Pause.Stop(); // Создать свой класс Pause
 		}
 	}
 }

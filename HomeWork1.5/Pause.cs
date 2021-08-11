@@ -8,7 +8,7 @@ namespace HomeWork1._5
 {
 	public class Pause
 	{
-		public void Stop()
+		public static void Stop()
 		{
 			Console.ReadLine();
 		}
