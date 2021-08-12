@@ -9,7 +9,7 @@ namespace HomeWork2._2
 {
 	class Program
 	{
-		// Написать метод подсчета количества цифр.
+		// Написать метод подсчета количества цифр числа.
 		static void Main(string[] args)
 		{
 			
