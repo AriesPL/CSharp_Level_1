@@ -19,7 +19,8 @@ namespace HomeWork1._2
 			Console.WriteLine("Enter mass");
 			float mass = Convert.ToInt32(Console.ReadLine());
 
-			float indexMass = ((height * height) / 100)/ mass; 
+			height /= 100;
+			float indexMass = mass / (height * height) ; 
 
 			Console.WriteLine("{0,0:f2}. You surprised me.", indexMass); 
 			Console.ReadLine();
