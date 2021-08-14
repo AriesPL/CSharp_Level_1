@@ -13,27 +13,32 @@ namespace HomeWork2._7
 			//Рекурсивный метод который выводит на экран числа от (a < b)
 			//Рекурсивный метод который считает суммы чисел от (a до b)
 			int a = 1;
-			int b = 1000;
+			int b = 64;
+			ulong n = 1;
 			Console.WriteLine("Number:");
-			Number(a, b);
+			Number(a,b);
 
 			Console.WriteLine("\nSum Number:");
-			SumNumber(a, b);
-			
+			SumNumber(n, a, b);
+
 			Console.ReadLine();
 		}
-		public static void Number(int a, int b)
+		public static void Number(int a,int b)
 		{
+			
 			Console.Write(" " + a);
+			
 			if (a < b)
-				Number(a + 1, b);
+				Number(a + 1,b);
+			
 		}
 
-		public static void SumNumber(int a, int b)
+		public static void SumNumber(ulong n,int a,int b)
 		{
-			Console.Write(" " + a);
+			Console.Write(" " + n);
+			
 			if (a < b)
-				SumNumber(a + a, b);
+				SumNumber(n + n,a++,b);
 		}
 	}
 }
