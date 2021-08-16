@@ -63,76 +63,113 @@ namespace HomeWork3._1
             }
         }
 
-
-
         //метод, который возвращает строковое представление данных.
         public string Print()
         {
             if(im<0)
-				return re  + im + "i";
+				return "\nОтвет :" + re  + im + "i\n\n";
 			else
-                return re + "+" + im + "i";
+                return "\nОтвет :" + re + "+" + im + "i\n\n";
         }
     }
     class Program
 	{
-  //      public enum works
-  //      {
-  //          task0,
-  //          task1,
-  //          task2,
-  //          task3,
-  //          exit
-  //      }
+		public enum works
+		{
+			task0,
+			task1,
+			task2,
+			task3,
+			exit
+		}
 
-  //      public static works menu()
-		//{
-  //          works worksResult = works.exit;
-  //          int choose = 0;
-  //          string strResult;
-  //          bool result = false;
-  //          Console.WriteLine("");
-  //          Console.WriteLine("");
-  //          Console.WriteLine("");
-  //          Console.WriteLine("");
-  //      }
-        static void Main(string[] args)
+		public static works menu()
+		{
+			works worksResult = works.exit;
+			string strResult;
+			bool result = false;
+			Console.WriteLine("Действия с комплехными числами:");
+			Console.WriteLine("1 - Сложение ");
+			Console.WriteLine("2 - Вычитание");
+			Console.WriteLine("3 - Умножение");
+			Console.WriteLine("4 - Деление");
+			Console.WriteLine("5 - Выход ");
+
+            do
+            {
+                strResult = Console.ReadLine();
+                if (strResult == "1" || strResult == "2" || strResult == "3" || strResult == "4" || strResult == "5")
+                    result = true;
+            }
+            while (!result);
+            worksResult = (works)(Convert.ToInt32(strResult)-1);
+
+            Console.Clear();
+            return worksResult;
+		}
+		static void Main(string[] args)
 		{
 			/*Дописать структуру Complex: добавить методы - Вычитания и Произведения. 
 										  добавить диалоговое окно switch демонстрирующее работу класса*/
+			works choise;
+			do
+			{
+				choise = menu();
+				switch (choise)
+				{
+					case works.task0:
+						ComplexPlus();
+						break;
+					case works.task1:
+						ComplexMinus();
+						break;
+					case works.task2:
+						ComplexMult();
+						break;
+					case works.task3:
+						ComplexDiv();
+						break;
+					case works.exit:
+						break;
 
-   //         do
-   //         {
-   //             switch (choose)
-   //             {
-   //                 case 1:
-   //                     break;
+				}
+			}
+			while (choise != works.exit);
+			Console.WriteLine("Press any key to exit . . .");
+			Console.ReadKey(true);
 
-   //             }
-   //         }
-   //         while (!false);
-			//{
+		}
 
-			//}
+		private static void ComplexDiv()
+		{
+			Complex complex1 = new Complex(1, 2);
+			Complex complex2 = new Complex(2, 1);
+			Complex resultDivision = complex1.Division(complex2);
+			Console.WriteLine(resultDivision.Print());
+		}
 
-            Complex complex1 = new Complex(1, 2);
-            Complex complex2 = new Complex(2, 1);
-            
-            
-            
-            Complex resultPlus = complex1.Plus(complex2);
-            Console.WriteLine(resultPlus.Print());
+		private static void ComplexMult()
+		{
+			Complex complex1 = new Complex(1, 2);
+			Complex complex2 = new Complex(2, 1);
+			Complex resultMultiplication = complex1.Multiplication(complex2);
+			Console.WriteLine(resultMultiplication.Print());
+		}
 
-            Complex resultMinus = complex1.Minus(complex2);
-            Console.WriteLine(resultMinus.Print());
+		private static void ComplexMinus()
+		{
+			Complex complex1 = new Complex(1, 2);
+			Complex complex2 = new Complex(2, 1);
+			Complex resultMinus = complex1.Minus(complex2);
+			Console.WriteLine(resultMinus.Print());
+		}
 
-            Complex resultMultiplication = complex1.Multiplication(complex2);
-            Console.WriteLine(resultMultiplication.Print());
-
-            Complex resultDivision = complex1.Division(complex2);
-            Console.WriteLine(resultDivision.Print());
-
-            Console.ReadLine();
-        }
-    }
+		private static void ComplexPlus()
+		{
+			Complex complex1 = new Complex(1, 2);
+			Complex complex2 = new Complex(2, 1);
+			Complex resultPlus = complex1.Plus(complex2);
+			Console.WriteLine(resultPlus.Print());
+		}
+	}
 }
