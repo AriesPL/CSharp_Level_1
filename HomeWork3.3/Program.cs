@@ -41,7 +41,7 @@ namespace HomeWork3._3
 			public static Drob operator +(Drob a, Drob b)//сложение дробей
 			{
 
-				Drob drobPlus = new Drob();//создание и инициализация новой дроби
+				Drob drobPlus = new Drob(1,1);//создание и инициализация новой дроби
 				drobPlus.number = a.number * b.denumber + a.denumber * b.number;//числитель новой дроби
 				drobPlus.denumber = a.denumber * b.denumber;//знаменатель новой дроби
 				SetFormat(drobPlus);//сокращаем дробь
@@ -50,7 +50,7 @@ namespace HomeWork3._3
 			}
 			public static Drob operator -(Drob a, Drob b)//вычитание дробей
 			{
-				Drob drobMinus = new Drob();//создание и инициализация новой дроби
+				Drob drobMinus = new Drob(1,1);//создание и инициализация новой дроби
 				drobMinus.number = a.number * b.denumber - a.denumber * b.number;//числитель новой дроби
 				drobMinus.denumber = a.denumber * b.denumber;//знаменатель новой дроби
 				SetFormat(drobMinus);//сокращаем дробь
@@ -59,7 +59,7 @@ namespace HomeWork3._3
 			}
 			public static Drob operator *(Drob a, Drob b)//вычитание дробей
 			{
-				Drob drobMult = new Drob();//создание и инициализация новой дроби
+				Drob drobMult = new Drob(1,1);//создание и инициализация новой дроби
 				drobMult.number = a.number * b.number;//числитель новой дроби
 				drobMult.denumber = a.denumber * b.denumber;//знаменатель новой дроби
 				SetFormat(drobMult);//сокращаем дробь
@@ -68,7 +68,7 @@ namespace HomeWork3._3
 			}
 			public static Drob operator /(Drob a, Drob b)//вычитание дробей
 			{
-				Drob drobDiv = new Drob();//создание и инициализация новой дроби
+				Drob drobDiv = new Drob(1,1);//создание и инициализация новой дроби
 				drobDiv.number = (a.number / b.number);//числитель новой дроби
 				drobDiv.denumber = a.denumber / b.denumber;//знаменатель новой дроби
 				SetFormat(drobDiv);//сокращаем дробь
@@ -95,8 +95,8 @@ namespace HomeWork3._3
 					//остатка и на числитель и на знаменатель
 					if ((a.number % i == 0) & (a.denumber % i == 0))
 					{
-						a.number = a.number / i;
-						a.denumber = a.denumber / i;
+						a.number = (int)(a.number / i);
+						a.denumber = (int)(a.denumber / i);
 					}
 
 				}
@@ -112,52 +112,93 @@ namespace HomeWork3._3
 			}
 
 
+		public enum pick //перечисление
+		{
+			drobPlus,
+			drobMinus,
+			drobMulti,
+			drobDiv,
+			exit
+		}
+		public static pick menu() // меню с бесконечным циклом пока не будет введена кнопка отвечающая за выход
+		{
+			pick pickResult = pick.exit;
+			string strResult;
+			bool result = false;
+			Console.WriteLine("Действия с дробями:");
+			Console.WriteLine("1 - Сложение ");
+			Console.WriteLine("2 - Вычитание");
+			Console.WriteLine("3 - Умножение");
+			Console.WriteLine("4 - Деление");
+			Console.WriteLine("5 - Выход ");
 
-
-
-			static void Main(string[] args)
+			do 
 			{
-				Drob drob1 = new Drob(1, 2);
-				Drob drob2 = new Drob(2, 4);
+				strResult = Console.ReadLine();  //считываем введеные данные
+				if (strResult == "1" || strResult == "2" || strResult == "3" || strResult == "4" || strResult == "5")
+					result = true;
+			}
+			while (!result);
+			pickResult = (pick)(Convert.ToInt32(strResult) - 1);
+
+			Console.Clear();
+			return pickResult;
+		}
+
+
+		static void Main(string[] args)
+			{
+				Drob drob1 = new Drob();
+				Drob drob2 = new Drob();
 				Drob drob3;
+			
+				Console.WriteLine("Введите числитель первой дроби:");
+				drob1.number = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Введите знаминатель первой дроби:");
+				drob1.denumber = Convert.ToInt32(Console.ReadLine());
 
-				//Console.WriteLine("Введите числитель первой дроби:");
-				//drob1.number = Convert.ToInt32(Console.ReadLine());
-				//Console.WriteLine("Введите знаминатель первой дроби:");
-				//drob1.denumber = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Введите числитель второй дроби:");
+				drob2.number = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Введите знаминатель второй дроби:");
+				drob2.denumber = Convert.ToInt32(Console.ReadLine());
+			
 
-				//Console.WriteLine("Введите числитель второй дроби:");
-				//drob2.number = Convert.ToInt32(Console.ReadLine());
-				//Console.WriteLine("Введите знаминатель второй дроби:");
-				//drob2.denumber = Convert.ToInt32(Console.ReadLine());
 
 				Console.WriteLine(drob1.ToString());
 				Console.WriteLine(drob2.ToString());
 
-			
-				if (drob1.number != 0 && drob2.number != 0 && drob1.denumber != 0 && drob2.denumber != 0)
+			pick choise;
+			do
+			{
+				choise = menu();
+				switch (choise)
 				{
-					drob3 = drob1 + drob2;
-					Console.WriteLine(drob3.ToString() + drob3.Answer());
+					case pick.drobPlus:
+						drob3 = drob1 + drob2;
+						Console.WriteLine($" Сложение {drob3.ToString()} {drob3.Answer()}");
+						break;
+					case pick.drobMinus:
+						drob3 = drob1 - drob2;
+						Console.WriteLine($" Вычитание {drob3.ToString()} {drob3.Answer()}");
+						break;
+					case pick.drobMulti:
+						drob3 = drob1 * drob2;
+						Console.WriteLine($" Умножение {drob3.ToString()} {drob3.Answer()}");
+						break;
+					case pick.drobDiv:
+						drob3 = drob1 / drob2;
+						Console.WriteLine($" Деление {drob3.ToString()} {drob3.Answer()}");
+						break;
+					case pick.exit:
+						break;
 
-					drob3 = drob1 - drob2;
-					Console.WriteLine(drob3.ToString() + drob3.Answer());
-
-					drob3 = drob1 * drob2;
-					Console.WriteLine(drob3.ToString() + drob3.Answer());
-
-					drob3 = drob1 / drob2;
-					Console.WriteLine(drob3.ToString() + drob3.Answer());
 				}
-				else
-					Console.WriteLine("знаменатель или числитель не может равняться 0.");
-			
-			
-
-			Console.ReadLine();
 			}
+			while (choise != pick.exit);
+			Console.WriteLine("Press any key to exit . . .");
+			Console.ReadLine();
 
-
+			}
 		}
 	}
 
