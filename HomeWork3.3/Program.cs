@@ -8,6 +8,7 @@ namespace HomeWork3._3
 {
 	class Program
 	{
+		//Описать класс дробей и взаимодействие с ними.
 		class Drob
 		{
 			public double number = 0;
