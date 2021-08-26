@@ -22,9 +22,9 @@ namespace HomeWork3._3
 			}
 
 			public Drob(int a, int b)
-			{
-				number = a;
-				denumber = b;
+			{	
+					number = a;
+					denumber = b;
 			}
 			public override string ToString()//cтроковое представление
 			{
@@ -162,46 +162,60 @@ namespace HomeWork3._3
 				drob2.number = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("Введите знаминатель второй дроби:");
 				drob2.denumber = Convert.ToInt32(Console.ReadLine());
-			
 
-
-				Console.WriteLine(drob1.ToString());
-				Console.WriteLine(drob2.ToString());
-
-			pick choise;
-			do
+			try 
 			{
-				choise = menu();
-				switch (choise)
+				if (drob1.number >= 1 && drob1.denumber >= 1 && drob2.number >= 1 && drob2.denumber >= 1)
 				{
-					case pick.drobPlus:
-						drob3 = drob1 + drob2;
-						Console.WriteLine($" Сложение {drob3.ToString()} {drob3.Answer()}");
-						break;
-					case pick.drobMinus:
-						drob3 = drob1 - drob2;
-						Console.WriteLine($" Вычитание {drob3.ToString()} {drob3.Answer()}");
-						break;
-					case pick.drobMulti:
-						drob3 = drob1 * drob2;
-						Console.WriteLine($" Умножение {drob3.ToString()} {drob3.Answer()}");
-						break;
-					case pick.drobDiv:
-						drob3 = drob1 / drob2;
-						Console.WriteLine($" Деление {drob3.ToString()} {drob3.Answer()}");
-						break;
-					case pick.exit:
-						break;
+					Console.WriteLine(drob1.ToString());
+					Console.WriteLine(drob2.ToString());
+					pick choise;
+					do
+					{
+						choise = menu();
+						switch (choise)
+						{
+							case pick.drobPlus:
+								drob3 = drob1 + drob2;
+								Console.WriteLine($" Сложение {drob3.ToString()} {drob3.Answer()}");
+								break;
+							case pick.drobMinus:
+								drob3 = drob1 - drob2;
+								Console.WriteLine($" Вычитание {drob3.ToString()} {drob3.Answer()}");
+								break;
+							case pick.drobMulti:
+								drob3 = drob1 * drob2;
+								Console.WriteLine($" Умножение {drob3.ToString()} {drob3.Answer()}");
+								break;
+							case pick.drobDiv:
+								drob3 = drob1 / drob2;
+								Console.WriteLine($" Деление {drob3.ToString()} {drob3.Answer()}");
+								break;
+							case pick.exit:
+								break;
 
+						}
+					}
+
+
+					while (choise != pick.exit);
+					Console.WriteLine("Press any key to exit . . .");
+					Console.ReadLine();
+				}
+				else
+				{
+					Console.WriteLine(drob1.ToString());
+					Console.WriteLine(drob2.ToString());
 				}
 			}
-			while (choise != pick.exit);
-			Console.WriteLine("Press any key to exit . . .");
-			Console.ReadLine();
-
+			finally
+			{
+				Console.WriteLine("Чеслитеть или знаменатель не может равняться 0.");
 			}
+			Console.ReadLine();
 		}
 	}
+}
 
 
 
