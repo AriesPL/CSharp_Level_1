@@ -13,10 +13,20 @@ namespace HomeWork4._1
 	{
 
 		int[] a;
+		
 
-		public MyMas(int size)
+		public MyMas(int size, int min)
 		{
+			int Sum = 0;
 			a = new int[size];
+			for (int i = 0; i < size; i++)
+			{
+				
+				a[i] = min;
+				min += 10;
+				Sum += a[i];
+			}
+			Console.WriteLine("Сумма всех чисел в массиве = "+Sum);
 		}
 		public MyMas(int size, int min, int max) //перегрузка с 3 паранитрами.
 		{
@@ -29,7 +39,18 @@ namespace HomeWork4._1
 			}
 
 		}
-
+	
+		public void InversMyMas() //метод создающий копию первого но с отрицательными значениями
+		{
+			Console.WriteLine("Массив с отрицательным значением");
+			int[] inversA = new int[Lenght];
+			for (int i = 0; i < a.Length; i++)
+			{
+				inversA[i] = a[i] * -1;
+				Console.Write(inversA[i]+" ");
+			}
+			
+		}
 
 		public int this[int index]// делаем метод для получения элемента массива через индексатор
 		{
@@ -73,30 +94,7 @@ namespace HomeWork4._1
 			writertxt.Close();
 		}
 
-		
-	}
-
-	class Program
-	{
-
-		static void Main(string[] args)
-		{
-
-			MyMas myMas = new MyMas(100, -10000, 10000);
-
-			myMas.WriterToText("myMas.txt");
-
-			Console.WriteLine($"Создан массив чисел :\n {myMas}");
-
-			myMas.Divisibility3();
-
-			ReadToText("myMas.txt");
-
-			Console.ReadLine();
-
-		}
-
-		private static void ReadToText(string filename)
+		public static void ReadToText(string filename) // Статический метод чтения txt-файла и выведение положительных массивов
 		{
 			try
 			{
@@ -118,7 +116,45 @@ namespace HomeWork4._1
 			{
 				Console.WriteLine("Файл не найден " + e.Message);
 			}
-		} // Статический метод чтения txt-файла и выведение положительных массивов
+		} 
+
+	}
+
+	class Program
+	{
+
+		static void Main(string[] args)
+		{
+
+
+			MyMas myMas1 = new MyMas(100, -10000, 10000);
+
+			myMas1.WriterToText("myMas1.txt");
+
+			Console.WriteLine($"Создан массив чисел :\n {myMas1}");
+
+			myMas1.Divisibility3();
+
+			MyMas.ReadToText("myMas1.txt");
+
+			Console.WriteLine("\nДлина массива?");
+			int lenght = Convert.ToInt32(Console.ReadLine());
+
+			Console.WriteLine("Какой массив будет первым?");
+			int value = Convert.ToInt32(Console.ReadLine());
+			MyMas myMas = new MyMas(lenght, value);
+			
+			Console.WriteLine(myMas);
+
+			myMas.InversMyMas();
+
+
+
+			Console.ReadLine();
+
+		}
+
+		
 	}
 }
 
