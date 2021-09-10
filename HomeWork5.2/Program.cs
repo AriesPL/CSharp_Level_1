@@ -16,60 +16,78 @@ namespace HomeWork5._2
 {
 	static class Message
 	{
-
-		public static void LongWord(string s, int value)
+		static char[] simbol = { ',', '.', ' ', '\r','\n','!','?',':',';','(',')','-','+' };
+		
+		public static string FindWord(string s, int value) //ищет слова не больше заданого числа пользователем.
 		{
-			Regex regexText = new Regex(@"\b[A-ZА-Яа-яa-z]\w+\b");
-			MatchCollection matchCollection = regexText.Matches(s);
-			foreach (Match item in matchCollection)
-				if (item.Length <= value) Console.Write(item + " ");
-		}
-		public static void DeleteWord(string s)
-		{
-			Regex regexTextDelete = new Regex(@"\b\w+[ь]\b");
-			
-			foreach (var item in regexTextDelete.Replace(s," "))
-			{ 
-				Console.Write(item);
-			}
-			Console.WriteLine("\nСлова которые были удалены:");
-			foreach(var item in regexTextDelete.Matches(s))
+			string[] text = s.Split(simbol,StringSplitOptions.RemoveEmptyEntries);
+			string word = "";
+			foreach (string item in text)
 			{
-				Console.Write(item + " ");
+				if (item.Length <= value) 
+					word += item + " ";
 			}
-
+			return word;
 		}
-		//public static void FindWord(string s)
-		//{
-		//	Regex regexLongWord = new Regex(@"\b\w+\b");
-		//	MatchCollection matchCollection = regexLongWord.Matches(s);
-		//	foreach (Match item in matchCollection)
-		//	{
-				
-		//			Console.WriteLine(item);
-				
-				
-				
-		//	}
+		public static string DeleteWord(string s, char c) //удаляет все слова заканчивающиеся на символ заданный пользователем.
+		{
+			string[] text = s.Split(simbol, StringSplitOptions.RemoveEmptyEntries);
+			string newText = "";
+			string findChar = c.ToString();
+			foreach(string item in text)
+			{
+				if (!item.EndsWith(findChar))
+					newText += item + ' ';
+			}
+			return newText;
+		}
+		static int WordMax(string s) // приватный метод поиска самого длинного слова в тексте.
+		{
+			string[] text = s.Split(simbol);
+			int max = 0;
+			foreach(string item in text)
+			{
+				if (item.Length > max)
+					max = item.Length;
+			}
+			return max;
+		}
+		public static string LongWord(string s) //найденые слова склеиваются с использованием StringBilder
+		{
+			string[] text = s.Split(simbol);
+			int wordMax = WordMax(s);
+			StringBuilder sb = new StringBuilder();
 			
-
-		//}
+			foreach(string item in text)
+			{
+				if (item.Length == wordMax)
+					sb.Append(item + " ");
+			}
+			return sb.ToString();
+		}
 	}
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Какой длинный должны быть слова?");
-			int lenghtWord = int.Parse(Console.ReadLine());
 			string s = File.ReadAllText("music.txt");
 
-			Message.LongWord(s, lenghtWord);
-
-			Message.DeleteWord(s);
-
-			//Message.FindWord(s);
-
+			Console.WriteLine("Какой длинный должны быть слова?");
+			int lenghtWord = int.Parse(Console.ReadLine());
+			Console.Write(Message.FindWord(s, lenghtWord));
 			Console.ReadLine();
+			Console.Clear();
+
+			Console.WriteLine("\nНа какой символ не должно заканчиваться слово?");
+			char deleteWord = char.Parse(Console.ReadLine());
+			Console.Write(Message.DeleteWord(s, deleteWord));
+			Console.ReadLine();
+			Console.Clear();
+
+			Console.WriteLine("\n\nСамые длинные слова в тексте:");
+			Console.Write(Message.LongWord(s));
+			Console.ReadLine();
+
 		}
 	}
 }
