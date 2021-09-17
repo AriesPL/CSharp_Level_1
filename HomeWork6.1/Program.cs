@@ -62,7 +62,7 @@ namespace HomeWork6._1
 			if (st1.course < st2.course) return -1;
 			return 0;
 		}
-		
+
 
 		static int MySort<T>(List<T> list, ThisIs<T> s)
 		{
@@ -96,7 +96,7 @@ namespace HomeWork6._1
 					if (student.course == 6) courses6++;
 
 					if (student.age >= 18 && student.age <= 20) courseN[student.course - 1]++;
-					
+
 				}
 				catch (Exception e)
 				{
@@ -109,14 +109,18 @@ namespace HomeWork6._1
 
 			Console.WriteLine("Кол-во студентов на 5 курсах: {0}", courses5);
 			Console.WriteLine("Кол-во студентов на 6 курсах: {0}", courses6);
-			
-			
+
+
 			Console.WriteLine("Кол-во студентов в возрасте от 18 до 20:");
 			for (int i = 0; i < courseN.Length; i++)
 			{
 				Console.WriteLine("На {0} курсе {1} студентов", i + 1, courseN[i]);
 			}
-			
+
+			Console.WriteLine("Студенты по возрасту:\n");
+			students.Sort(MyMethod);
+			foreach (var sortStudents in students)
+				Console.Write("Студент:{0} {1}. Его возраст: {2}\n", sortStudents.firstName, sortStudents.lastName, sortStudents.age);
 
 			Console.WriteLine("Студенты младше 18 лет: {0}", MySort<Student>(students, delegate (Student s) { return s.age < 18; }));
 
